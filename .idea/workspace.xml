@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Project4Task2:war exploded" />
+      <artifact name="Project4Task2:war" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6751db1e-448a-4be1-acca-87af5492822b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project4Task2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project4Task2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Project4Task2_war/Project4Task2_war.war" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/WEB-INF/classes/cmu/edu/ds/aarushg/MongoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/WEB-INF/classes/cmu/edu/ds/aarushg/MongoServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project4Task2/cmu/edu/ds/aarushg/MongoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project4Task2/cmu/edu/ds/aarushg/MongoServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/MongoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/MongoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/MongoUserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/MongoUserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/userDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmu/edu/ds/aarushg/userDashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +151,7 @@
       <updated>1573189380076</updated>
       <workItem from="1573189381656" duration="46763000" />
       <workItem from="1573284372163" duration="1100000" />
-      <workItem from="1573320025291" duration="16790000" />
+      <workItem from="1573320025291" duration="17261000" />
     </task>
     <servers />
   </component>
