@@ -14,7 +14,6 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
 <%@ page import="java.util.*" %>
 <%@ page import="org.json.simple.parser.JSONParser" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="javax.persistence.criteria.CriteriaBuilder" %>
 <html>
 <head>
     <title>Cocktail Server - OMD</title>

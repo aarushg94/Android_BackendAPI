@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Project4Task2:war exploded" />
+      <artifact name="Project4Task2:war" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6751db1e-448a-4be1-acca-87af5492822b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Project4Task2_war.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project4Task2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project4Task2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Project4Task2_war/Project4Task2_war.war" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Project4Task2_war_exploded/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,7 +47,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../CocktailService" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -154,7 +151,7 @@
       <updated>1573189380076</updated>
       <workItem from="1573189381656" duration="46763000" />
       <workItem from="1573284372163" duration="1100000" />
-      <workItem from="1573320025291" duration="18217000" />
+      <workItem from="1573320025291" duration="18409000" />
     </task>
     <servers />
   </component>
