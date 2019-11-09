@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="javax.json-1.0">
+    <CLASSES>
+      <root url="jar://D:/DS_hw_jars/javax.json-1.0.jar!/" />
+      <root url="jar://D:/DS_hw_jars/json-simple-1.1.jar!/" />
+      <root url="jar://D:/DS_hw_jars/json-20140107.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
