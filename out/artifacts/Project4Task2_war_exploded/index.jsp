@@ -14,6 +14,7 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
 <%@ page import="java.util.*" %>
 <%@ page import="org.json.simple.parser.JSONParser" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="javax.persistence.criteria.CriteriaBuilder" %>
 <html>
 <head>
     <title>Cocktail Server - OMD</title>
@@ -38,7 +39,7 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header" style="text-align: center;font-weight: bold;background-color: darkseagreen;">
-                    5 Most Searched Words
+                    User Searched Words
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-md table-hover table-success"
@@ -55,18 +56,8 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
                         <%
                             int index = 1;
                             userDashboard ud = new userDashboard();
-                            HashMap<String, Integer> searchWordMap = new HashMap<>(ud.searchCount());
-                            LinkedHashMap<String, Integer> sortedWordMap = new LinkedHashMap<>();
-                            searchWordMap.entrySet()
-                                    .stream()
-                                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                                    .forEachOrdered(x -> sortedWordMap.put(x.getKey(), x.getValue()));
-                            int rowNum = 0;
+                            TreeMap<String, Integer> sortedWordMap = new TreeMap<>(ud.searchCount());
                             for (String key : sortedWordMap.keySet()) {
-                                if (rowNum == 5) {
-                                    break;
-                                }
-                                rowNum++;
                         %>
                         <tr>
                             <td><%
