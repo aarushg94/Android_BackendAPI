@@ -1,3 +1,11 @@
+/**
+ * Author Name: Aarush Gupta
+ * Author ID: aarushg
+ *
+ * This acts as the dashboard servlet. It fetches all the data from the mongo collections in order to parse and
+ * perform operations on the same to show valuable insights on the dashboard page.
+ */
+
 package cmu.edu.ds.aarushg;
 
 import com.mongodb.MongoClient;
@@ -21,9 +29,23 @@ import java.util.HashMap;
 @WebServlet(name = "userDashboard", urlPatterns = "/userMetrics")
 public class userDashboard extends HttpServlet {
 
+    /**
+     * Make initial connection to MongoDB in order to fetch the database from which the data has to be retreived.
+     */
+
     MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
     MongoClient mongoClient = new MongoClient(uri);
     MongoDatabase database = mongoClient.getDatabase("Project4Task2");
+
+    /**
+     * Method() doGet
+     * Calls all the helper methods in order to perform the operations to show valuable insights on the metrics
+     * dashboard page. Once all opearations have been performed and the data is rendered, it closes the mongo
+     * connection.
+     *
+     * @param request
+     * @param response
+     */
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         getElapsedTime();
@@ -35,7 +57,18 @@ public class userDashboard extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        mongoClient.close();
     }
+
+    /**
+     * Method() searchCount
+     * It fetches all the data from the searchWord collection and reads the documents one by one with the help of
+     * MongoCursor. For each word it adds it to an arraylist. The arraylist in then traversed through in order to
+     * take the unique words and store them in a Hashmap with their respective counts to check for words with
+     * highest totals.
+     *
+     * @return -> Hashmap with words and their counts
+     */
 
     public HashMap<String, Integer> searchCount() {
         HashMap<String, Integer> searchWordMap = new HashMap<>();
@@ -46,6 +79,7 @@ public class userDashboard extends HttpServlet {
         while (cursor.hasNext()) {
             searchedWords.add(cursor.next().get("searchWord").toString());
         }
+        cursor.close();
         int temp = 0;
         for (int i = 0; i < searchedWords.size(); i++) {
             if (searchWordMap.containsKey(searchedWords.get(i))) {
@@ -60,6 +94,14 @@ public class userDashboard extends HttpServlet {
         return searchWordMap;
     }
 
+    /**
+     * Method() getElapsedTime
+     * This fetches all documents from elapsedTime collection in order to calculate an average elapsedTime for all
+     * user requests till date.
+     *
+     * @return -> elapsed time in milliseconds
+     */
+
     public long getElapsedTime() {
         int count = 0;
         long time = 0;
@@ -73,6 +115,13 @@ public class userDashboard extends HttpServlet {
         return time / count;
     }
 
+    /**
+     * Method() getUserAgentList
+     * This fetches all the documents from userAgent collection in order to add the same in an array list.
+     *
+     * @return -> Arraylist of all user Agents
+     */
+
     public ArrayList<String> getUserAgentList() {
         MongoDatabase database = mongoClient.getDatabase("Project4Task2");
         MongoCollection<Document> collection = database.getCollection("userAgent");
@@ -84,6 +133,14 @@ public class userDashboard extends HttpServlet {
         }
         return userAgentList;
     }
+
+    /**
+     * Method() getUserLogs
+     * This fetches the dataLogs collection and parses through each document with the help of MongoCursor to fetch
+     * records, parse and store then in a JSON array.
+     *
+     * @return -> JSON Array of user pertaining logs.
+     */
 
     public JSONArray getUserLogs() throws ParseException {
         MongoCollection<Document> collection = database.getCollection("dataLogs");
@@ -102,6 +159,14 @@ public class userDashboard extends HttpServlet {
         }
         return jsonArray;
     }
+
+    /**
+     * Method() getAPIResponseDetails
+     * This fetches all the documents from inputFromAPI collection. It then loops through each document via
+     * MongoCursor and fetches the data and stores the same in a JSON Array.
+     *
+     * @return -> JSON Array of API response logs.
+     */
 
     public JSONArray getAPIResponseDetails() throws ParseException {
         MongoCollection<Document> collection = database.getCollection("inputFromAPI");

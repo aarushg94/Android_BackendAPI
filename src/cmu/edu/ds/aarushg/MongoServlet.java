@@ -1,3 +1,15 @@
+/**
+ * Author Name: Aarush Gupta
+ * Author ID: aarushg
+ *
+ * This acts as the server (API endpoint) and stores user data for the Android application - CocktailSelector.
+ * It instantiates the CocktailModel class to perform fetch data from a URL end point i.e. CocktailDBAPI
+ * (https://www.thecocktaildb.com/api.php) and parses the same and sends it back to the Android application.
+ * It also records the user data along with the API response which was received from the cocktails db API after
+ * parsing and selecting some of the data. This is responsible for storing logs and information about the application
+ * overall to perform analytics on the same later.
+ */
+
 package cmu.edu.ds.aarushg;
 
 import com.mongodb.MongoClient;
@@ -11,7 +23,6 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,10 +41,28 @@ public class MongoServlet extends HttpServlet {
     long startTime;
     long endTime;
 
+    /**
+     * Method() init()
+     * We instantiate the servlet by instantiating the model class it uses. The servlet responds to the GET request
+     * via the doGet method.
+     */
+
     @Override
     public void init() {
         mongoUserModel = new MongoUserModel();
     }
+
+    /**
+     * Method() doGet
+     * This is responsible for parsing the JSON data and storing all user logs such as start time, end time, elapsed
+     * time, word searched for, user agent (device) and logs for the android application. It does so by calling all
+     * it's helper methods.
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
 
     @Override
     public void doGet(HttpServletRequest request,
@@ -52,6 +81,17 @@ public class MongoServlet extends HttpServlet {
         addLogs(searchWord, elapsedTime, userAgent, startTime, endTime);
         String nextView = null;
     }
+
+    /**
+     * Method() parseToJSON
+     * Opens a MongoDB connection. Fetches the database and the required collection. It then creates a new document
+     * for each word that the user inputs. Since there can be many drinks for 1 word (base of alcohol), it randomizes
+     * the jsonArray to provide with a randomly chosed drink. It then fetches the json response and appends the same
+     * to each document. This corresponds to the inputFromAPI collection in mongoDB. It then stores this data in
+     * that document and then closes the connection.
+     *
+     * @param finalResponse
+     */
 
     private void parseToJSON(String finalResponse) {
         MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
@@ -72,7 +112,16 @@ public class MongoServlet extends HttpServlet {
         doc.append("instructions", jo1.get("strInstructions"));
         doc.append("imageURL", jo1.get("strDrinkThumb"));
         collection.insertOne(doc);
+        mongoClient.close();
     }
+
+    /**
+     * Method() addSearchWord
+     * Opens a MongoDB connection. Fetches the database and the required collection. It then creates a new document
+     * for each word that the user has input. It then stores that word and closes the connection.
+     *
+     * @param searchWord
+     */
 
     public void addSearchWord(String searchWord) {
         MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
@@ -81,7 +130,17 @@ public class MongoServlet extends HttpServlet {
         MongoCollection<Document> collection = database.getCollection("searchWord");
         Document searchDoc = new Document("searchWord", searchWord);
         collection.insertOne(searchDoc);
+        mongoClient.close();
     }
+
+    /**
+     * Method() addTime
+     * Opens a MongoDB connection. Fetches the database and the required collection. It then creates a new collection
+     * to store the elapsed time which is the difference between the end time and start time of the user request and
+     * rendering of data. It then stores that data and closes the connection.
+     *
+     * @param elapsedTime
+     */
 
     public void addTime(long elapsedTime) {
         MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
@@ -90,7 +149,16 @@ public class MongoServlet extends HttpServlet {
         MongoCollection<Document> collection = database.getCollection("elapsedTime");
         Document timeDoc = new Document("elapsedTime", elapsedTime);
         collection.insertOne(timeDoc);
+        mongoClient.close();
     }
+
+    /**
+     * Method() addUserAgent
+     * Opens a MongoDB connection. Fetches the database and the required collection. It creates a new mongo document
+     * each time a user tries to fetch data. It then stores that data and closes the connection.
+     *
+     * @param userAgent
+     */
 
     public void addUserAgent(String userAgent) {
         MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
@@ -99,7 +167,22 @@ public class MongoServlet extends HttpServlet {
         MongoCollection<Document> collection = database.getCollection("userAgent");
         Document userAgentDoc = new Document("userAgent", userAgent);
         collection.insertOne(userAgentDoc);
+        mongoClient.close();
     }
+
+    /**
+     * Method() addLogs
+     * Opens a MongoDB connection. Fetches the database and the required collection. It then creates a new document
+     * to store logs consisting of the search word, elapsed time, userAgent, start time and end time. It then appends
+     * all this information to a document each time the user searches for a word. It then stores this document and
+     * closes the connection.
+     *
+     * @param searchWord
+     * @param elapsedTime
+     * @param userAgent
+     * @param startTime
+     * @param endTime
+     */
 
     public void addLogs(String searchWord, long elapsedTime, String userAgent, long startTime, long endTime) {
         MongoClientURI uri = new MongoClientURI("mongodb+srv://aarushg:aarushpassword@mealdbcluster-aky53.mongodb.net/test?retryWrites=true&w=majority");
@@ -112,5 +195,6 @@ public class MongoServlet extends HttpServlet {
         doc.append("startTime", Long.toString(startTime));
         doc.append("endTime", Long.toString(endTime));
         collection.insertOne(doc);
+        mongoClient.close();
     }
 }

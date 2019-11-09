@@ -1,3 +1,12 @@
+/**
+ * Author Name: Aarush Gupta
+ * Author ID: aarushg
+ *
+ * This acts as the Model class for the MongoServlet. It is used to make the connection to the API end point of
+ * cocktails db, fetch the json, parse and send it to the servlet to send it further to the android application and
+ * store that data in the mongo collection.
+ */
+
 package cmu.edu.ds.aarushg;
 
 import java.io.BufferedReader;
@@ -12,6 +21,15 @@ public class MongoUserModel {
 
     String inputLine;
     String url;
+
+    /**
+     * Method() getCocktailDetails
+     * Makes a HTTP connection with the API endpoint and fetches the data. Upon successfully fetching the data, it
+     * sends the same to the servlet in order to send it to the android application.
+     *
+     * @param searchTerm
+     * @return
+     */
 
     public String getCocktailDetails(String searchTerm) {
         StringBuffer response = new StringBuffer();
@@ -29,7 +47,13 @@ public class MongoUserModel {
                 response.append(inputLine);
             }
             in.close();
-        } catch (ProtocolException e) {
+        }
+
+        /**
+         * Exception Handling
+         */
+
+        catch (ProtocolException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
