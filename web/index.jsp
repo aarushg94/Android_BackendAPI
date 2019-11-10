@@ -27,13 +27,37 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
     <div class="jumbotron jumbotron-fluid" style="padding:10px !important;">
         <hr>
         <div class="container">
-            <h1 class="display-4" style="text-align: center;font-size: 35px;color: darkgoldenrod;font-weight: bold;">
+            <h1 class="display-4" style="text-align: center;font-size: 35px;color: black;font-weight: bold;">
                 Operational Metrics Dashboard</h1>
         </div>
         <hr>
     </div>
 </div>
 <div class="container" style="min-width: 100%;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center;font-weight: bold;background-color: #eec999;">
+                    Total searches performed -->
+                    <%
+                        userDashboard ud = new userDashboard();
+                        int totalSearchCount = ud.getUserAgentList().size();
+                        out.println(totalSearchCount); %>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center;font-weight: bold;background-color: #eec999;">
+                    Overall Average Elapsed Time for All User Requests -->
+                    <%
+                        String eTime = String.valueOf(ud.getElapsedTime());
+                        out.println(eTime + " milliseconds"); %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p></p>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
@@ -54,7 +78,6 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
 
                         <%
                             int index = 1;
-                            userDashboard ud = new userDashboard();
                             TreeMap<String, Integer> sortedWordMap = new TreeMap<>(ud.searchCount());
                             for (String key : sortedWordMap.keySet()) {
                         %>
@@ -112,11 +135,11 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header" style="text-align: center;font-weight: bold;background-color: #eec999;">
+                <div class="card-header" style="text-align: center;font-weight: bold;background-color: pink;">
                     User Interaction Logs
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-md table-hover table-warning"
+                    <table class="table table-bordered table-md table-hover table-danger"
                            style="font-size: 12px !important;">
                         <thead>
                         <tr>
@@ -161,11 +184,11 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header" style="text-align: center;font-weight: bold;background-color: pink;">
+                <div class="card-header" style="text-align: center;font-weight: bold;background-color: #eec999;">
                     API Response Logs
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-md table-hover table-danger"
+                    <table class="table table-bordered table-md table-hover table-warning"
                            style="font-size: 12px !important;">
                         <thead>
                         <tr>
@@ -202,6 +225,5 @@ Note: Minified js from Bootstrap is used for coloring, rendering and animation s
         </div>
     </div>
 </div>
-
 </body>
 </html>

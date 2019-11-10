@@ -1,7 +1,7 @@
 /**
  * Author Name: Aarush Gupta
  * Author ID: aarushg
- *
+ * <p>
  * This acts as the dashboard servlet. It fetches all the data from the mongo collections in order to parse and
  * perform operations on the same to show valuable insights on the dashboard page.
  */
@@ -66,6 +66,8 @@ public class userDashboard extends HttpServlet {
      * MongoCursor. For each word it adds it to an arraylist. The arraylist in then traversed through in order to
      * take the unique words and store them in a Hashmap with their respective counts to check for words with
      * highest totals.
+     * <p>
+     * Source for FindIterable/MongoCursor: https://stackoverflow.com/questions/30424894/java-syntax-with-mongodb
      *
      * @return -> Hashmap with words and their counts
      */
@@ -97,7 +99,9 @@ public class userDashboard extends HttpServlet {
     /**
      * Method() getElapsedTime
      * This fetches all documents from elapsedTime collection in order to calculate an average elapsedTime for all
-     * user requests till date.
+     * user requests till date to display on the dashboard.
+     * <p>
+     * Source for FindIterable/MongoCursor: https://stackoverflow.com/questions/30424894/java-syntax-with-mongodb
      *
      * @return -> elapsed time in milliseconds
      */
@@ -118,6 +122,8 @@ public class userDashboard extends HttpServlet {
     /**
      * Method() getUserAgentList
      * This fetches all the documents from userAgent collection in order to add the same in an array list.
+     * <p>
+     * Source for FindIterable/MongoCursor: https://stackoverflow.com/questions/30424894/java-syntax-with-mongodb
      *
      * @return -> Arraylist of all user Agents
      */
@@ -138,6 +144,8 @@ public class userDashboard extends HttpServlet {
      * Method() getUserLogs
      * This fetches the dataLogs collection and parses through each document with the help of MongoCursor to fetch
      * records, parse and store then in a JSON array.
+     * <p>
+     * Source for FindIterable/MongoCursor: https://stackoverflow.com/questions/30424894/java-syntax-with-mongodb
      *
      * @return -> JSON Array of user pertaining logs.
      */
@@ -164,6 +172,8 @@ public class userDashboard extends HttpServlet {
      * Method() getAPIResponseDetails
      * This fetches all the documents from inputFromAPI collection. It then loops through each document via
      * MongoCursor and fetches the data and stores the same in a JSON Array.
+     * <p>
+     * Source for FindIterable/MongoCursor: https://stackoverflow.com/questions/30424894/java-syntax-with-mongodb
      *
      * @return -> JSON Array of API response logs.
      */

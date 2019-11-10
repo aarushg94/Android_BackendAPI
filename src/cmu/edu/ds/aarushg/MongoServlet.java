@@ -1,7 +1,7 @@
 /**
  * Author Name: Aarush Gupta
  * Author ID: aarushg
- *
+ * <p>
  * This acts as the server (API endpoint) and stores user data for the Android application - CocktailSelector.
  * It instantiates the CocktailModel class to perform fetch data from a URL end point i.e. CocktailDBAPI
  * (https://www.thecocktaildb.com/api.php) and parses the same and sends it back to the Android application.
@@ -69,17 +69,20 @@ public class MongoServlet extends HttpServlet {
                       HttpServletResponse response) throws IOException, ServletException {
         startTime = System.currentTimeMillis();
         searchWord = request.getQueryString();
-        addSearchWord(searchWord);
         finalResponse = mongoUserModel.getCocktailDetails(searchWord);
-        parseToJSON(finalResponse);
-        response.getWriter().append(finalResponse);
-        endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        userAgent = request.getHeader("User-Agent");
-        addUserAgent(userAgent);
-        addTime(elapsedTime);
-        addLogs(searchWord, elapsedTime, userAgent, startTime, endTime);
-        String nextView = null;
+        if (finalResponse.equals("{\"drinks\":null}")) {
+            System.out.println("No data received for word " + searchWord);
+        } else {
+            addSearchWord(searchWord);
+            parseToJSON(finalResponse);
+            response.getWriter().append(finalResponse);
+            endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+            userAgent = request.getHeader("User-Agent");
+            addUserAgent(userAgent);
+            addTime(elapsedTime);
+            addLogs(searchWord, elapsedTime, userAgent, startTime, endTime);
+        }
     }
 
     /**
