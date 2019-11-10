@@ -1,7 +1,7 @@
 # Android_BackendAPI
 
-**Website: https://mongodbproject4task2.herokuapp.com/
-**Android Application Project Structure: Android_CocktailSelector
+**Website: https://mongodbproject4task2.herokuapp.com/**
+**Android Application Project Structure: Android_CocktailSelector**
 
 # Part A
 This acts as the 3rd Party API for the Android_CocktailSelector project. This fetches data from a 3rd party API (https://www.thecocktaildb.com/api.php). It then parses the json and gets only the required data for the application. Redundant data is removed altogether from the response. This web service is hosted on heroku.
